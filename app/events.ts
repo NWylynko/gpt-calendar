@@ -4,6 +4,7 @@ import parseDate from "date-fns/parseJSON";
 import { Config } from "./ConfigForm";
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { getGPT } from "./openai";
+import startOfMonth from 'date-fns/startOfMonth'
 
 const eventSchema = z.object({
   allDay: z.boolean(),
@@ -50,7 +51,7 @@ const useEventsStore = create<EventsStore>()(
               },
               {
                 "role": "user",
-                "content": `The current date is ${new Date().toISOString()} but I am currently looking at the date ${date.toISOString()} on the calendar and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone} apply the events to the current time`,
+                "content": `The current date is ${new Date().toISOString()} but I am currently looking at the date ${startOfMonth(date).toISOString()} on the calendar and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone} apply the events to the current time`,
               },
               {
                 "role": "user",
