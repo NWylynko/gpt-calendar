@@ -19,6 +19,7 @@ type Events = z.infer<typeof eventsSchema>;
 type EventsStore = {
   events: Events;
   promptGPT: (message: string) => Promise<void>;
+  rawGPTResponse: string;
   config: Partial<Config>;
   setConfig: (newConfig: Config) => void;
   clearEvents: () => void;
@@ -52,7 +53,6 @@ const useEventsStore = create<EventsStore>()(
               },
               {
                 "role": "user",
-                // "content": `Respond with just the events in the format of a json array with the following format: {"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string}`
                 content: `Respond with only a json array, generate the events with the following format: [{"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string}], do not add any further comment`
               }
             ],
@@ -66,16 +66,31 @@ const useEventsStore = create<EventsStore>()(
             throw new Error("No message returned from GPT-3");
           }
 
-          const unParsedEvents = JSON.parse(response);
+          set({ rawGPTResponse: response })
 
-          console.log({ unParsedEvents })
+          try {
+            const unParsedEvents = JSON.parse(response);
 
-          const events = eventsSchema.parse(unParsedEvents);
+            console.log({ unParsedEvents })
 
-          console.log({ events })
+            const events = eventsSchema.parse(unParsedEvents);
 
-          set(() => ({ events: [...get().events, ...events] }));
+            console.log({ events })
+
+            set(() => ({ events: [...get().events, ...events] }));
+          } catch (error) {
+            const unParsedEvents = JSON.parse(response.split("```")[1])
+
+            console.log({ unParsedEvents })
+
+            const events = eventsSchema.parse(unParsedEvents);
+
+            console.log({ events })
+
+            set(() => ({ events: [...get().events, ...events] }));
+          }
         },
+        rawGPTResponse: "",
         config: {
           apiKey: undefined
         },
@@ -95,3 +110,4 @@ export const useSetConfig = () => useEventsStore((store) => store.setConfig);
 export const useConfig = () => useEventsStore((store) => store.config);
 export const usePromptGPT = () => useEventsStore((store) => store.promptGPT);
 export const useClearEvents = () => useEventsStore((store) => store.clearEvents)
+export const useRawResponse = () => useEventsStore((store) => store.rawGPTResponse)

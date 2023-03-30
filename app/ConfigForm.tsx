@@ -27,6 +27,7 @@ export const ConfigForm = () => {
     <form onSubmit={form.handleSubmit(setConfig)} className="flex flex-col">
       <label>GPT Api Key - <Link className="text-blue-300 hover:underline" href="https://platform.openai.com/account/api-keys">Get yours here</Link></label>
       <input type="password" {...form.register("apiKey")} className="border-2 m-2 p-2 border-zinc-800 rounded-xl" />
+      <span>(only stored in local-storage)</span>
       <ErrorMessage errors={form.formState.errors} name="apiKey" />
 
       <button type="submit" className="border-2 m-2 p-2 border-zinc-800 rounded-xl">Save</button>

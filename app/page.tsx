@@ -40,9 +40,10 @@ export default function Home() {
       <div className="m-2 w-[284px] relative">
         <ConfigForm />
         <AddEventsPrompt />
-        <div className="flex absolute bottom-0">
+        <div className="flex flex-col absolute bottom-0">
           <ClearEvents />
-          <Link  className="border-2 m-2 p-2 border-zinc-800 rounded-xl" href="https://nick.wylynko.com">Technical Demo by Nick Wylynko</Link>
+          <Link  className="border-2 m-2 p-2 border-zinc-800 rounded-xl text-center" href="https://github.com/NWylynko/gpt-calendar">Github Repository</Link>
+          <Link  className="border-2 m-2 p-2 border-zinc-800 rounded-xl text-center" href="https://nick.wylynko.com">Technical Demo by Nick Wylynko</Link>
         </div>
       </div>
 

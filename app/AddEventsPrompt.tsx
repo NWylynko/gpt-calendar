@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useConfig, usePromptGPT } from "./events";
+import { useConfig, usePromptGPT, useRawResponse } from "./events";
 import { useState } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { AiOutlineLoading } from "@react-icons/all-files/ai/AiOutlineLoading"
@@ -16,6 +16,7 @@ export const AddEventsPrompt = () => {
 
   const promptGPT = usePromptGPT()
   const config = useConfig()
+  const rawResponse = useRawResponse()
   const [errorMessage, setErrorMessage] = useState<string>()
 
   const form = useForm<z.infer<typeof schema>>({
@@ -42,7 +43,7 @@ export const AddEventsPrompt = () => {
         {loading ? <span>Generating</span> : <span>Generate</span>}
         {loading ? <AiOutlineLoading className="animate-spin" size={24} /> : <></>}
       </button>
-      {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+      {errorMessage && <><div className="text-red-500">{errorMessage}</div><div className="text-red-500">{rawResponse}</div></>}
     </form>
   )
 }
