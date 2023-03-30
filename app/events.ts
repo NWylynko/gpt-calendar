@@ -10,6 +10,7 @@ const eventSchema = z.object({
   title: z.string(),
   start: z.string().transform(parseDate),
   end: z.string().transform(parseDate),
+  color: z.string(),
 })
 const eventsSchema = z.array(eventSchema);
 
@@ -18,7 +19,7 @@ type Events = z.infer<typeof eventsSchema>;
 
 type EventsStore = {
   events: Events;
-  promptGPT: (message: string) => Promise<void>;
+  promptGPT: (message: string, date: Date) => Promise<void>;
   rawGPTResponse: string;
   config: Partial<Config>;
   setConfig: (newConfig: Config) => void;
@@ -30,7 +31,7 @@ const useEventsStore = create<EventsStore>()(
     (set, get) => {
       return {
         events: [],
-        promptGPT: async (message: string) => {
+        promptGPT: async (message: string, date: Date) => {
           const { apiKey } = get().config;
           if (!apiKey) {
             throw new Error("No API key set");
@@ -41,11 +42,15 @@ const useEventsStore = create<EventsStore>()(
             messages: [
               {
                 "role": "system",
-                content: `You are a virtual calendar assistant, you help create peoples calendars, you only respond with pure json (do not respond with code block). the event format for events is [{"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string}]`,
+                content: `You are a virtual calendar assistant, you help create peoples calendars, you only respond with pure json (do not respond with code block). the event format for events is [{"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string, "color": random nice hex string}]`,
+              },
+              {
+                "role": "assistant",
+                "content": JSON.stringify(get().events)
               },
               {
                 "role": "user",
-                "content": `The current date is ${new Date().toISOString()} and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone} apply the events to the current time`,
+                "content": `The current date is ${new Date().toISOString()} but I am currently looking at the date ${date.toISOString()} on the calendar and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone} apply the events to the current time`,
               },
               {
                 "role": "user",
@@ -89,9 +94,23 @@ const useEventsStore = create<EventsStore>()(
   )
 )
 
+type HotStore = {
+  currentDate: Date;
+  changeDate: (newDate: Date) => void;
+}
+
+const useHotStore = create<HotStore>()((set, get) => {
+  return {
+    currentDate: new Date(),
+    changeDate: (newDate: Date) => set({ currentDate: newDate }),
+  }
+})
+
 export const useEvents = () => useEventsStore((store) => store.events);
 export const useSetConfig = () => useEventsStore((store) => store.setConfig);
 export const useConfig = () => useEventsStore((store) => store.config);
 export const usePromptGPT = () => useEventsStore((store) => store.promptGPT);
 export const useClearEvents = () => useEventsStore((store) => store.clearEvents)
 export const useRawResponse = () => useEventsStore((store) => store.rawGPTResponse)
+export const useCurrentDate = () => useHotStore((store) => store.currentDate)
+export const useChangeDate = () => useHotStore((store) => store.changeDate)

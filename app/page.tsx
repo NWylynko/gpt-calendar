@@ -7,7 +7,7 @@ import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import enUS from 'date-fns/locale/en-US'
-import { useEvents } from "./events";
+import { useChangeDate, useCurrentDate, useEvents } from "./events";
 import { ConfigForm } from "./ConfigForm";
 import { AddEventsPrompt } from "./AddEventsPrompt";
 import { ClearEvents } from "./ClearEvents";
@@ -27,14 +27,24 @@ const localizer = dateFnsLocalizer({
 
 export default function Home() {
   const events = useEvents();
+  const date = useCurrentDate();
+  const changeDate = useChangeDate();
+
   return (
+    <div>
     <main className="flex">
       <Calendar
+        date={date}
+        onNavigate={changeDate}
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
         style={{ margin: "1rem", height: "calc(100vh - 2rem)", width: "calc(100vw - 300px - 2rem)" }}
+        eventPropGetter={(event) => {
+          const backgroundColor = event.color;
+          return { style: { backgroundColor } }
+        }}
       />
 
       <div className="m-2 w-[284px] relative">
@@ -48,5 +58,6 @@ export default function Home() {
       </div>
 
     </main>
+    </div>
   )
 }

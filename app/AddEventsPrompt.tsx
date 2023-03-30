@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useConfig, usePromptGPT, useRawResponse } from "./events";
+import { useConfig, useCurrentDate, usePromptGPT, useRawResponse } from "./events";
 import { useState } from "react";
 import { ErrorMessage } from "@hookform/error-message";
 import { AiOutlineLoading } from "@react-icons/all-files/ai/AiOutlineLoading"
@@ -17,6 +17,8 @@ export const AddEventsPrompt = () => {
   const promptGPT = usePromptGPT()
   const config = useConfig()
   const rawResponse = useRawResponse()
+  const date = useCurrentDate();
+
   const [errorMessage, setErrorMessage] = useState<string>()
 
   const form = useForm<z.infer<typeof schema>>({
@@ -25,7 +27,7 @@ export const AddEventsPrompt = () => {
 
   const onSubmit = form.handleSubmit(async (data) => {
     try {
-      await promptGPT(data.prompt)
+      await promptGPT(data.prompt, date)
     } catch (error: any) {
       setErrorMessage(error.message)
     }
