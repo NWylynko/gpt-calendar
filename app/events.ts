@@ -41,11 +41,7 @@ const useEventsStore = create<EventsStore>()(
             messages: [
               {
                 "role": "system",
-                content: "You are a virtual assistant that helps people with their calendar, you only respond with json",
-              },
-              {
-                "role": "user",
-                "content": message,
+                content: `You are a virtual calendar assistant, you help create peoples calendars, you only respond with pure json (do not respond with code block). the event format for events is [{"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string}]`,
               },
               {
                 "role": "user",
@@ -53,8 +49,8 @@ const useEventsStore = create<EventsStore>()(
               },
               {
                 "role": "user",
-                content: `Respond with only a json array, generate the events with the following format: [{"allDay": boolean, "title": string, "start": ISO Format string, "end": ISO Format string}], do not add any further comment`
-              }
+                "content": `Respond with only a json array, create an event or events that are sufficient for the users request of "${message}", do not add any further comment`
+              },
             ],
             n: 1,
             max_tokens: 1000,
