@@ -8,6 +8,7 @@ specifiers:
   '@types/react': ^18.0.31
   '@types/react-big-calendar': ^1.6.3
   '@types/react-dom': ^18.0.11
+  '@vercel/analytics': ^0.1.11
   autoprefixer: ^10.4.14
   date-fns: ^2.29.3
   next: ^13.2.4
@@ -26,6 +27,7 @@ dependencies:
   '@hookform/error-message': 2.0.1_p2kkbz2vboo2v2fp4rjdd4myoe
   '@hookform/resolvers': 3.0.0_react-hook-form@7.43.8
   '@react-icons/all-files': '@github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz_react@18.2.0'
+  '@vercel/analytics': 0.1.11_react@18.2.0
   date-fns: 2.29.3
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   openai: 3.2.1
@@ -273,6 +275,14 @@ packages:
 
   /@types/warning/3.0.0:
     resolution: {integrity: sha512-t/Tvs5qR47OLOr+4E9ckN8AmP2Tf16gWq+/qA4iUGS/OOyHVO8wv2vjJuX8SNOUTJyWb+2t7wJm6cXILFnOROA==}
+    dev: false
+
+  /@vercel/analytics/0.1.11_react@18.2.0:
+    resolution: {integrity: sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /any-promise/1.3.0:
