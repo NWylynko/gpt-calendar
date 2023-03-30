@@ -8,6 +8,7 @@
 	"dependencies": {
 		"@hookform/error-message": "^2.0.1",
 		"@hookform/resolvers": "^3.0.0",
+		"@react-icons/all-files": "https://github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz",
 		"date-fns": "^2.29.3",
 		"next": "^13.2.4",
 		"openai": "^3.2.1",

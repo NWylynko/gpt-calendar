@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@hookform/error-message': ^2.0.1
   '@hookform/resolvers': ^3.0.0
+  '@react-icons/all-files': https://github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz
   '@types/node': 18.15.11
   '@types/react': ^18.0.31
   '@types/react-big-calendar': ^1.6.3
@@ -24,6 +25,7 @@ specifiers:
 dependencies:
   '@hookform/error-message': 2.0.1_p2kkbz2vboo2v2fp4rjdd4myoe
   '@hookform/resolvers': 3.0.0_react-hook-form@7.43.8
+  '@react-icons/all-files': '@github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz_react@18.2.0'
   date-fns: 2.29.3
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   openai: 3.2.1
@@ -1206,4 +1208,15 @@ packages:
     dependencies:
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  '@github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz_react@18.2.0':
+    resolution: {tarball: https://github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz}
+    id: '@github.com/react-icons/react-icons/releases/download/v4.8.1-snapshot.2/react-icons-all-files-4.8.1-snapshot.2.tgz'
+    name: '@react-icons/all-files'
+    version: 4.8.1-snapshot.2
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false

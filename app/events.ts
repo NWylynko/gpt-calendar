@@ -48,7 +48,7 @@ const useEventsStore = create<EventsStore>()(
               },
               {
                 "role": "user",
-                "content": `The current date is ${new Date().toISOString()} and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone}`,
+                "content": `The current date is ${new Date().toISOString()} and I am in the timezone of ${Intl.DateTimeFormat().resolvedOptions().timeZone} apply the events to the current time`,
               },
               {
                 "role": "user",
@@ -90,7 +90,8 @@ const useEventsStore = create<EventsStore>()(
   )
 )
 
-export const useEvents = () => useEventsStore((state) => state.events);
-export const useSetConfig = () => useEventsStore((state) => state.setConfig);
-export const useConfig = () => useEventsStore((state) => state.config);
-export const usePromptGPT = () => useEventsStore((state) => state.promptGPT);
+export const useEvents = () => useEventsStore((store) => store.events);
+export const useSetConfig = () => useEventsStore((store) => store.setConfig);
+export const useConfig = () => useEventsStore((store) => store.config);
+export const usePromptGPT = () => useEventsStore((store) => store.promptGPT);
+export const useClearEvents = () => useEventsStore((store) => store.clearEvents)
