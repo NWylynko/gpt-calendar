@@ -41,7 +41,7 @@ const useEventsStore = create<EventsStore>()(
             messages: [
               {
                 "role": "system",
-                content: "You are a virtual assistant that helps people with their calendar",
+                content: "You are a virtual assistant that helps people with their calendar, you only respond with json",
               },
               {
                 "role": "user",
