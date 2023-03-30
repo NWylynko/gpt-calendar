@@ -1,6 +1,6 @@
 ## GPT Calendar
 
-![Demo](./gpt_calendar_demo.mov)
+![Demo](./gpt_calendar_demo.gif)
 
 ## Getting Started
 
