@@ -68,27 +68,15 @@ const useEventsStore = create<EventsStore>()(
 
           set({ rawGPTResponse: response })
 
-          try {
-            const unParsedEvents = JSON.parse(response);
+          const unParsedEvents = JSON.parse(response);
 
-            console.log({ unParsedEvents })
+          console.log({ unParsedEvents })
 
-            const events = eventsSchema.parse(unParsedEvents);
+          const events = eventsSchema.parse(unParsedEvents);
 
-            console.log({ events })
+          console.log({ events })
 
-            set(() => ({ events: [...get().events, ...events] }));
-          } catch (error) {
-            const unParsedEvents = JSON.parse(response.split("```")[1])
-
-            console.log({ unParsedEvents })
-
-            const events = eventsSchema.parse(unParsedEvents);
-
-            console.log({ events })
-
-            set(() => ({ events: [...get().events, ...events] }));
-          }
+          set(() => ({ events: [...get().events, ...events] }));
         },
         rawGPTResponse: "",
         config: {
