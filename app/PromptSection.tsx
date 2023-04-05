@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const PromptSection = () => {
   return (
-    <div className="p-2 w-[300px] h-full flex flex-col justify-between">
+    <div className="p-2 w-[300px] h-full flex flex-col justify-between bg-white">
       <div className="flex flex-col">
         <ConfigForm />
         <AddEventsPrompt />
