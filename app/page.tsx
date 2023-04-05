@@ -53,7 +53,7 @@ export default function Home() {
 
 
       </main>
-      <div className="btm-nav border-t border-t-black md:hidden p-4">
+      <div className="btm-nav border-t border-t-black md:hidden p-4 z-[500000]">
         <label htmlFor="my-modal" className="btn bg-white text-black hover:bg-white">OPEN GPT PROMPT</label>
       </div>
     </div>
